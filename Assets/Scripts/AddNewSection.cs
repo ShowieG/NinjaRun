@@ -6,6 +6,7 @@ public class AddNewSection : MonoBehaviour
 {
     //public GameObject roadSection;
     public GameObject[] sectionPrefabs;
+    public HitManager hitManagerScript;
 
     private float distanceBetweenSections = 53;
     private int sectionIndex;
@@ -13,7 +14,8 @@ public class AddNewSection : MonoBehaviour
     //which section to spawn
     private void Update()
     {
-        sectionIndex = Random.Range(0, sectionPrefabs.Length);
+        //sectionIndex = Random.Range(0, sectionPrefabs.Length);
+        sectionIndex = hitManagerScript.dangerLevel;
     }
 
     //spawn road section when player hits trigger

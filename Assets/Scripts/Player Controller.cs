@@ -10,11 +10,11 @@ public class PlayerController : MonoBehaviour
 
     public float laneDistance = 1; //distance between 2 lanes
     public float switchLaneSpeed = 4;
-    HitManager hitManagerScript;
+    public HitManager hitManagerScript;
 
     private void Start()
     {
-        hitManagerScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<HitManager>();
+        //hitManagerScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<HitManager>();
     }
 
     void Update()

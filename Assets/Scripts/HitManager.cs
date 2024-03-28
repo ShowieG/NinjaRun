@@ -9,46 +9,60 @@ public class HitManager : MonoBehaviour
     public Image progressBar;
     public float dangerCooldown = 10;
 
-    private int dangerLevel = 0;
+    public int dangerLevel; //danger lvl number displayed on the screen
     private float maxBarValue = 100;
     private float currentBarValue;
+    public float fillAmountPerIncrement = 20;
 
     private void Start()
     {
-        dangerLevel = 0;
-        currentBarValue = 0;
         UpdateNumberText();
         UpdateProgressBar();
     }
 
     private void Update()
     {
-        if(dangerLevel > 0)
+        if (currentBarValue > 0)
         {
-            if (currentBarValue > 0)
-            {
-                currentBarValue -= Time.deltaTime * dangerCooldown;
-                UpdateProgressBar();
-            }
-            else
-            {
-                dangerLevel--;
-                UpdateNumberText();
-                ResetProgressBar();
-            }
+            currentBarValue -= Time.deltaTime * dangerCooldown;
+            UpdateProgressBar();
         }
         else
         {
-            currentBarValue = 0;
+            DecreaseDangerLevel();
             UpdateProgressBar();
         }
     }
 
     public void IncreaseDanger()
     {
-        dangerLevel++;
-        UpdateNumberText();
-        ResetProgressBar();
+        currentBarValue += fillAmountPerIncrement;
+        if (currentBarValue >= maxBarValue)
+        {
+            currentBarValue = maxBarValue;
+            IncreaseDangerLevel();
+        }
+        UpdateProgressBar();
+    }
+
+    public void IncreaseDangerLevel()
+    {
+        if (dangerLevel < 3)
+        {
+            dangerLevel++;
+            UpdateNumberText();
+            currentBarValue = 0;
+        }
+    }
+
+    public void DecreaseDangerLevel()
+    {
+        if (dangerLevel > 0)
+        {
+            dangerLevel--;
+            UpdateNumberText();
+            currentBarValue = 100;
+        }
     }
 
     private void UpdateNumberText()
@@ -58,13 +72,13 @@ public class HitManager : MonoBehaviour
 
     private void UpdateProgressBar()
     {
-        float fillAmount = currentBarValue / maxBarValue;
-        progressBar.fillAmount = fillAmount;
+        //float fillAmount = currentBarValue / maxBarValue;
+        progressBar.fillAmount = currentBarValue / maxBarValue;
     }
 
     private void ResetProgressBar()
     {
-        currentBarValue = maxBarValue;
+        currentBarValue = 0;
         UpdateProgressBar();
     }
 
