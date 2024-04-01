@@ -9,9 +9,9 @@ public class HitManager : MonoBehaviour
     public Image progressBar;
     public float dangerCooldown = 10;
 
-    public int dangerLevel; //danger lvl number displayed on the screen
+    public int dangerLevel = 0; //danger lvl number displayed on the screen
     private float maxBarValue = 100;
-    private float currentBarValue;
+    private float currentBarValue = 0;
     public float fillAmountPerIncrement = 20;
 
     private void Start()
@@ -32,6 +32,7 @@ public class HitManager : MonoBehaviour
             DecreaseDangerLevel();
             UpdateProgressBar();
         }
+        print("current dangerlevel is " + dangerLevel);
     }
 
     public void IncreaseDanger()
@@ -41,6 +42,7 @@ public class HitManager : MonoBehaviour
         {
             currentBarValue = maxBarValue;
             IncreaseDangerLevel();
+            
         }
         UpdateProgressBar();
     }
@@ -50,8 +52,9 @@ public class HitManager : MonoBehaviour
         if (dangerLevel < 3)
         {
             dangerLevel++;
+            print("Danger go up" + dangerLevel);
             UpdateNumberText();
-            currentBarValue = 0;
+            currentBarValue = 10;
         }
     }
 

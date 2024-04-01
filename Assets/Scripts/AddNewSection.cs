@@ -6,6 +6,7 @@ public class AddNewSection : MonoBehaviour
 {
     //public GameObject roadSection;
     public GameObject[] sectionPrefabs;
+    public GameObject[] danger1Sections;
     public HitManager hitManagerScript;
 
     private float distanceBetweenSections = 53;
