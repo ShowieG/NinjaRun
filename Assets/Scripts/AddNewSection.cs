@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AddNewSection : MonoBehaviour
 {
-    public GameObject[] sectionPrefabs;
+    //public GameObject[] sectionPrefabs;
 
     public GameObject[] danger0Sections;
     public GameObject[] danger1Sections;
