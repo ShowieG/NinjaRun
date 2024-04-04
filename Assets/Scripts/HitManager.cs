@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +30,7 @@ public class HitManager : MonoBehaviour
             DecreaseDangerLevel();
             UpdateProgressBar();
         }
-        print("current dangerlevel is " + dangerLevel);
+        //print("current dangerlevel is " + dangerLevel);
     }
 
     public void IncreaseDanger()
@@ -52,7 +50,7 @@ public class HitManager : MonoBehaviour
         if (dangerLevel < 3)
         {
             dangerLevel++;
-            print("Danger go up" + dangerLevel);
+            //print("Danger go up" + dangerLevel);
             UpdateNumberText();
             currentBarValue = 10;
         }

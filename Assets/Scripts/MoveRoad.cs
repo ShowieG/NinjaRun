@@ -1,14 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class MoveRoad : MonoBehaviour
 {
-    public float roadSpeed = -4;
+    private GameManager gameManagerScript;
+
+    private void Start()
+    {
+        gameManagerScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+    }
 
     void Update()
     {
-        transform.position += new Vector3(0, 0, roadSpeed) * Time.deltaTime;
+        transform.position += new Vector3(0, 0, gameManagerScript.roadSpeed) * Time.deltaTime;
     }
 }

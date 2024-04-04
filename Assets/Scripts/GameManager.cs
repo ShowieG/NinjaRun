@@ -1,39 +1,93 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //this script is currently not in use
-    public GameObject[] roadSections;
-    public float zSpawn = 0;
-    private float sectionLength = 20;
-    public int sectionsSpawned = 1;
-    private float distanceBetweenSections = 55;
+    //this script starts and ends the game, also makes the game go faster overtime
+    public GameObject particles;
+    public GameObject characterModel;
+    
+    public float roadSpeed = 0;
+    public float initialSpeed = 0f;
+    public float targetSpeed = -12f;
+    public float transitionTime = 0.2f;
+    public float delayBeforeChange = 0.1f;
 
-    void Start()
+    private float timeScaleIncreaseInterval = 10f; // Increase time scale after this duration
+    private float timeScaleIncreaseFactor = 1.01f; // Factor by which time scale increases
+
+
+    private void Start()
     {
-        for(int i=0; i<sectionsSpawned; i++)
+        StartCoroutine(IncreaseTimeScaleOverTime());
+    }
+
+    IEnumerator IncreaseTimeScaleOverTime()
+    {
+        while (Time.timeScale < 3)
         {
-            if (i == 0)
-            {
-                SpawnSection(0);
-            }
-            else
-            {
-                SpawnSection(Random.Range(0, roadSections.Length));
-            }
+            Time.timeScale *= timeScaleIncreaseFactor;
+
+            // Wait for the next interval
+            yield return new WaitForSeconds(timeScaleIncreaseInterval);
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartGame()
     {
-        
+        StartCoroutine(StartRunning());
     }
 
-    public void SpawnSection(int sectionIndex)
+    IEnumerator StartRunning()
     {
-        Instantiate(roadSections[sectionIndex], new Vector3(0, 0, distanceBetweenSections), Quaternion.identity);
+        yield return new WaitForSeconds(delayBeforeChange);
+
+        float elapsedTime = 0f;
+        float currentSpeed = initialSpeed;
+
+        while (elapsedTime < transitionTime)
+        {
+            float t = elapsedTime / transitionTime;
+
+            currentSpeed = Mathf.SmoothStep(initialSpeed, targetSpeed, elapsedTime / transitionTime);
+
+            // Update the speed of the road
+            UpdateSpeed(currentSpeed);
+
+            // Increment elapsed time
+            elapsedTime += Time.deltaTime;
+
+            // Wait for the next frame
+            yield return null;
+        }
+
+        UpdateSpeed(targetSpeed);
+    }
+
+    void UpdateSpeed(float speed)
+    {
+        roadSpeed = speed;
+    }
+
+    public void EndGame()
+    {
+        StopCoroutine(StartRunning());
+        StartCoroutine(Dying());
+    }
+
+    IEnumerator Dying()
+    {
+        //stops running
+        //targetSpeed = 0;
+        //Time.timeScale = 1;
+        
+        //smoke particles
+        particles.SetActive(true);
+        characterModel.SetActive(false);
+
+        //wait till particles finished playing
+        yield return new WaitForSeconds(0.55f);
+        SceneManager.LoadScene(0);
     }
 }
