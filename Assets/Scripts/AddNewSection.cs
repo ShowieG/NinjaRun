@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class AddNewSection : MonoBehaviour
 {
+    //This script adds new roadsections based on the danger level
+
     //public GameObject[] sectionPrefabs;
 
     public GameObject[] danger0Sections;

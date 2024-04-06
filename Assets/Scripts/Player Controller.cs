@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //This script enables player movement and registers hits
+
     private int desiredLane = 0; // left = <0, middle = 0, right = >0
     private bool moveLeft = true;
     private bool moveRight = true;
@@ -10,9 +12,11 @@ public class PlayerController : MonoBehaviour
     public float switchLaneSpeed = 4;
     public HitManager hitManagerScript;
 
+    private GameManager gameManagerScript;
+
     private void Start()
     {
-        //hitManagerScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<HitManager>();
+        gameManagerScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -71,10 +75,14 @@ public class PlayerController : MonoBehaviour
     //Obstacle Hit
     private void OnTriggerEnter(Collider other)
     {
-        
         if (other.gameObject.CompareTag("Obstacle"))
         {
             hitManagerScript.IncreaseDanger();
+        }
+
+        if (other.gameObject.CompareTag("DMG_Obstacle"))
+        {
+            gameManagerScript.EndGame();
         }
     }
 }

@@ -4,9 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //this script starts and ends the game, also makes the game go faster overtime
+    //This script starts and ends the game, also makes the game go faster overtime
+
     public GameObject particles;
     public GameObject characterModel;
+    public PlayerController playerControllerScript;
     
     public float roadSpeed = 0;
     public float initialSpeed = 0f;
@@ -20,7 +22,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(IncreaseTimeScaleOverTime());
+        //StartCoroutine(IncreaseTimeScaleOverTime());
+        playerControllerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     IEnumerator IncreaseTimeScaleOverTime()
@@ -78,13 +81,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Dying()
     {
-        //stops running
-        //targetSpeed = 0;
-        //Time.timeScale = 1;
-        
-        //smoke particles
         particles.SetActive(true);
         characterModel.SetActive(false);
+        playerControllerScript.enabled = false;
 
         //wait till particles finished playing
         yield return new WaitForSeconds(0.55f);

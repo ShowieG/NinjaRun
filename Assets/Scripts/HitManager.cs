@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class HitManager : MonoBehaviour
 {
+    //This script tracks hits and danger level
+
     public Text hitText;
     public Image progressBar;
     public float dangerCooldown = 10;

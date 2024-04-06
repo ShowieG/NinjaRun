@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MoveRoad : MonoBehaviour
 {
+    //This script is on every road section and moves the section
+
     private GameManager gameManagerScript;
 
     private void Start()

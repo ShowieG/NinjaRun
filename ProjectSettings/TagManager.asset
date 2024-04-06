@@ -11,6 +11,7 @@ TagManager:
   - Movement_RightBorder
   - Obstacle
   - GameManager
+  - DMG_Obstacle
   layers:
   - Default
   - TransparentFX
