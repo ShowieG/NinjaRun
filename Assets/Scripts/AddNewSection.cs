@@ -4,8 +4,6 @@ public class AddNewSection : MonoBehaviour
 {
     //This script adds new roadsections based on the danger level
 
-    //public GameObject[] sectionPrefabs;
-
     public GameObject[] danger0Sections;
     public GameObject[] danger1Sections;
     public GameObject[] danger2Sections;
@@ -19,9 +17,6 @@ public class AddNewSection : MonoBehaviour
     //which section to spawn
     private void Update()
     {
-        //sectionIndex = Random.Range(0, sectionPrefabs.Length);
-        //sectionIndex = hitManagerScript.dangerLevel;
-
         if(hitManagerScript.dangerLevel == 0)
         {
             sectionIndex = Random.Range(0, danger0Sections.Length);
@@ -48,8 +43,6 @@ public class AddNewSection : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Trigger_NewSection"))
         {
-            //Instantiate(sectionPrefabs[sectionIndex], new Vector3(0, 0, distanceBetweenSections), Quaternion.identity);
-
             if (hitManagerScript.dangerLevel == 0)
             {
                 Instantiate(danger0Sections[sectionIndex], new Vector3(0, 0, distanceBetweenSections), Quaternion.identity);

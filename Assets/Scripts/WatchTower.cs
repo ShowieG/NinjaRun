@@ -6,19 +6,19 @@ public class WatchTower : MonoBehaviour
 {
     private GameObject player;
     public float distanceToPlayer;
-    public float triggerDistance = 12f;
+    public float maxTriggerDistance = 18f;
+    public float minTriggerDistance = 5f;
 
     public GameObject bulletPrefab; // Reference to the bullet prefab
     public GameObject warningPrefab;
     public float laserDuration = 2f; // Duration the laser follows the player
     private float elapsedTime = 0f;
     public float bulletSpeed = 10f; // Speed of the bullet
-    public float bulletDuration = 1f;
     private bool isShooting = false;
 
     private LineRenderer lineRenderer; // Reference to the Line Renderer component
     private Vector3 lastPlayerPosition; // Last position of the player
-    private Vector3 originLaser;
+    private Vector3 originLaser; //Where laser starts
 
     void Start()
     {
@@ -30,14 +30,14 @@ public class WatchTower : MonoBehaviour
 
     void Update()
     {
-        float distanceToPlayerZ = Mathf.Abs(transform.position.z - player.transform.position.z);
+        distanceToPlayer = Mathf.Abs(transform.position.z - player.transform.position.z);
 
         // Check if the player is within the trigger distance
-        if (distanceToPlayerZ < triggerDistance)
+        if (distanceToPlayer <= maxTriggerDistance && distanceToPlayer >= minTriggerDistance)
         {
             //print("within triggerDistance");
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, triggerDistance))
+            if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit))
             {
                 // Check if the ray hit the player
                 if (hit.collider.CompareTag("Player"))
@@ -69,6 +69,10 @@ public class WatchTower : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+        {
+            lineRenderer.enabled = false;
         }
     }
 

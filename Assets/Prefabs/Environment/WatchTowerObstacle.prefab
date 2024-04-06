@@ -152,12 +152,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToPlayer: 0
-  triggerDistance: 18
+  maxTriggerDistance: 19
+  minTriggerDistance: 6
   bulletPrefab: {fileID: 5162287657811122102, guid: 51e9a7abf53263649b507abe0262a991, type: 3}
   warningPrefab: {fileID: 5841705744977186581, guid: cb380288ff1ab1f47acf53567bd532d0, type: 3}
-  laserDuration: 0.8
-  bulletSpeed: 15
-  bulletDuration: 1
+  laserDuration: 0.7
+  bulletSpeed: 19
 --- !u!120 &4950654674770855465
 LineRenderer:
   serializedVersion: 2

@@ -8,7 +8,6 @@ public class SwordSlashTrigger : MonoBehaviour
 
     Animator enemyAnimator;
     public float triggerDistance = 12f;
-    //public DistanceToPlayer distancePlayerScript;
     private GameObject player;
 
     private void Start()
@@ -19,15 +18,6 @@ public class SwordSlashTrigger : MonoBehaviour
 
     private void Update()
     {
-
-        //    if (distancePlayerScript.distanceToPlayer < triggerDistance)
-        //    {
-        //        enemyAnimator.SetBool("PlayerDetected", true);
-        //    } else
-        //    {
-        //        enemyAnimator.SetBool("PlayerDetected", false);
-        //    }
-
         float distanceToPlayerZ = Mathf.Abs(transform.position.z - player.transform.position.z);
 
         // Check if the player is within the trigger distance
