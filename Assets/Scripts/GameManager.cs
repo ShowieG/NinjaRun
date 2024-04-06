@@ -87,6 +87,12 @@ public class GameManager : MonoBehaviour
 
         //wait till particles finished playing
         yield return new WaitForSeconds(0.55f);
+        PlayerPrefs.Save();
         SceneManager.LoadScene(0);
+    }
+
+    public void QuitApplication()
+    {
+        Application.Quit();
     }
 }

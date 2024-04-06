@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
     public Text highScoreText;
 
     private float score = 0;
-    public float highScore;
+    public static float highScore;
 
     public GameObject gameUI;
     public HitManager hitManagerScript;
@@ -17,18 +17,15 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        UpdateNumberText();
-        gameUI.SetActive(false); //game HUD is hidden before player starts running, it turns active via the start button
+        gameUI.SetActive(false); // Game HUD is hidden before player starts running, it turns active via the start button
 
-        highScoreText.enabled = false; //highscore is disabled, enabled if there is a highscore
-        if (PlayerPrefs.HasKey("Highscore"))
+        // Highscore is disabled, enabled if there is a highscore
+        highScoreText.enabled = false;
+        if (PlayerPrefs.HasKey("Highscore") && highScore > 0)
         {
             highScoreText.enabled = true;
             highScore = PlayerPrefs.GetFloat("HighScore");
         }
-
-        // Start increasing score over time
-        InvokeRepeating(nameof(IncreaseScore), 1f, 1f); // Invoke IncreaseScore method every second
     }
 
     void IncreaseScore()
@@ -42,19 +39,32 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        UpdateNumberText();
-        highScoreText.text = "Highscore: " + ((int)highScore).ToString();
+        // Update UI Text
+        UpdateScoreText();
+        UpdateHighScoreText();
 
+        // Update highscore
         if (score > highScore)
         {
             highScore = score;
-            PlayerPrefs.SetFloat("Highscore", highScore);
+            PlayerPrefs.SetFloat("HighScore", highScore);
         }
     }
 
-    private void UpdateNumberText()
+    public void StartScoreCounting()
+    {
+        // Start increasing score over time
+        InvokeRepeating(nameof(IncreaseScore), 1f, 1f); // Invoke every second
+    }
+
+    private void UpdateScoreText()
     {
         scoreText.text = "Score: " + ((int)score).ToString();
+    }
+
+    private void UpdateHighScoreText()
+    {
+        highScoreText.text = "Highscore: " + ((int)highScore).ToString();
     }
 
     float GetDangerLevelMultiplier(int dangerLevel)

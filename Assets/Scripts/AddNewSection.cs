@@ -8,11 +8,13 @@ public class AddNewSection : MonoBehaviour
     public GameObject[] danger1Sections;
     public GameObject[] danger2Sections;
     public GameObject[] danger3Sections;
+    public GameObject[] environmentSections;
 
     public HitManager hitManagerScript;
 
     private float distanceBetweenSections = 53;
     private int sectionIndex;
+    private int environmentIndex;
 
     //which section to spawn
     private void Update()
@@ -62,6 +64,9 @@ public class AddNewSection : MonoBehaviour
             {
                 Instantiate(danger3Sections[sectionIndex], new Vector3(0, 0, distanceBetweenSections), Quaternion.identity);
             }
+
+            environmentIndex = Random.Range(0, environmentSections.Length);
+            Instantiate(environmentSections[environmentIndex], new Vector3(0, 0, distanceBetweenSections), Quaternion.identity);
         }
     }
 }
