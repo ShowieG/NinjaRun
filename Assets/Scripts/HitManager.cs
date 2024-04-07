@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class HitManager : MonoBehaviour
 {
     //This script tracks hits and danger level
+    // Old method and not used anymore. Replaced by DangerManger
 
     public Text hitText;
     public Image progressBar;

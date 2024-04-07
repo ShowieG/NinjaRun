@@ -101,6 +101,6 @@ public class WatchTower : MonoBehaviour
         Destroy(bullet);
         Destroy(warning);
 
-        Debug.Log("Bullet reached the target position");
+        //Debug.Log("Bullet reached the target position");
     }
 }

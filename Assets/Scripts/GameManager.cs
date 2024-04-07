@@ -9,26 +9,30 @@ public class GameManager : MonoBehaviour
     public GameObject particles;
     public GameObject characterModel;
     public PlayerController playerControllerScript;
-    
+
+    [Header("Start Running")]
     public float roadSpeed = 0;
     public float initialSpeed = 0f;
     public float targetSpeed = -12f;
-    public float transitionTime = 0.2f;
-    public float delayBeforeChange = 0.1f;
+    public float transitionTime = 0.2f; //The time it takes to go from initialSpeed to targetSpeed
+    public float delayBeforeChange = 0.1f; //Makes sure that character animation fully plays
 
-    private float timeScaleIncreaseInterval = 10f; // Increase time scale after this duration
-    private float timeScaleIncreaseFactor = 1.01f; // Factor by which time scale increases
+    [Header("Game Accelerate Overtime")]
+    public float timeScaleIncreaseInterval = 10f; // Increase time scale after this duration
+    public float timeScaleIncreaseFactor = 1.01f; // Factor by which time scale increases
+    public float maxTimeScale = 4f;
 
 
     private void Start()
     {
-        //StartCoroutine(IncreaseTimeScaleOverTime());
+        StartCoroutine(ResetTimeScale());
+        StartCoroutine(IncreaseTimeScaleOverTime());
         playerControllerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     IEnumerator IncreaseTimeScaleOverTime()
     {
-        while (Time.timeScale < 3)
+        while (Time.timeScale < maxTimeScale)
         {
             Time.timeScale *= timeScaleIncreaseFactor;
 
@@ -76,7 +80,16 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         StopCoroutine(StartRunning());
+        StopCoroutine(IncreaseTimeScaleOverTime());
+
+        StartCoroutine(ResetTimeScale());
         StartCoroutine(Dying());
+    }
+
+    IEnumerator ResetTimeScale()
+    {
+        Time.timeScale = 1;
+        yield return null;
     }
 
     IEnumerator Dying()
@@ -87,6 +100,7 @@ public class GameManager : MonoBehaviour
 
         //wait till particles finished playing
         yield return new WaitForSeconds(0.55f);
+
         PlayerPrefs.Save();
         SceneManager.LoadScene(0);
     }

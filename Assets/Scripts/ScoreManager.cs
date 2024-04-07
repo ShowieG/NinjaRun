@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour
 
         // Highscore is disabled, enabled if there is a highscore
         highScoreText.enabled = false;
-        if (PlayerPrefs.HasKey("Highscore") && highScore > 0)
+        if (highScore > 0)
         {
             highScoreText.enabled = true;
             highScore = PlayerPrefs.GetFloat("HighScore");

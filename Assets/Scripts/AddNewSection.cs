@@ -16,6 +16,16 @@ public class AddNewSection : MonoBehaviour
     private int sectionIndex;
     private int environmentIndex;
 
+    private void Start()
+    {
+        Instantiate(danger0Sections[Random.Range(0, danger0Sections.Length)], new Vector3(0, 0, 20), Quaternion.identity);
+        Instantiate(environmentSections[Random.Range(0, environmentSections.Length)], new Vector3(0, 0, 20), Quaternion.identity);
+        Instantiate(danger0Sections[Random.Range(0, danger0Sections.Length)], new Vector3(0, 0, 40), Quaternion.identity);
+        Instantiate(environmentSections[Random.Range(0, environmentSections.Length)], new Vector3(0, 0, 40), Quaternion.identity);
+        Instantiate(danger0Sections[Random.Range(0, danger0Sections.Length)], new Vector3(0, 0, 60), Quaternion.identity);
+        Instantiate(environmentSections[Random.Range(0, environmentSections.Length)], new Vector3(0, 0, 60), Quaternion.identity);
+    }
+
     //which section to spawn
     private void Update()
     {

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float laneDistance = 1; //distance between 2 lanes
     public float switchLaneSpeed = 4;
     public HitManager hitManagerScript;
+    public DangerManager dangerManagerScript;
 
     private GameManager gameManagerScript;
 
@@ -78,6 +79,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Obstacle"))
         {
             hitManagerScript.IncreaseDanger();
+            dangerManagerScript.IncreaseDangerTotal();
         }
 
         if (other.gameObject.CompareTag("DMG_Obstacle"))
