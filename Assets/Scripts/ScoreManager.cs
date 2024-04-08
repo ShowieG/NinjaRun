@@ -12,7 +12,8 @@ public class ScoreManager : MonoBehaviour
     public static float highScore;
 
     public GameObject gameUI;
-    public HitManager hitManagerScript;
+    //public HitManager hitManagerScript;
+    public DangerManager dangerManagerScript;
     public float[] additionByDangerLevel = { 1f, 2f, 4f, 10f }; // Addition based on danger level
 
     void Start()
@@ -31,7 +32,7 @@ public class ScoreManager : MonoBehaviour
     void IncreaseScore()
     {
         // Calculate the score increase based on the current danger level
-        float addition = GetDangerLevelMultiplier(hitManagerScript.dangerLevel);
+        float addition = GetDangerLevelMultiplier(dangerManagerScript.dangerLevel);
 
         // Increase the score based on the multiplier and the base increase rate
         score += addition * 100 * Time.deltaTime;

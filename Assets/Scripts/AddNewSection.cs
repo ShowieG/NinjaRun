@@ -10,7 +10,8 @@ public class AddNewSection : MonoBehaviour
     public GameObject[] danger3Sections;
     public GameObject[] environmentSections;
 
-    public HitManager hitManagerScript;
+    //public HitManager hitManagerScript;
+    public DangerManager dangerManagerScript;
 
     private float distanceBetweenSections = 53;
     private int sectionIndex;
@@ -29,22 +30,22 @@ public class AddNewSection : MonoBehaviour
     //which section to spawn
     private void Update()
     {
-        if(hitManagerScript.dangerLevel == 0)
+        if(dangerManagerScript.dangerLevel == 0)
         {
             sectionIndex = Random.Range(0, danger0Sections.Length);
         }
 
-        if (hitManagerScript.dangerLevel == 1)
+        if (dangerManagerScript.dangerLevel == 1)
         {
             sectionIndex = Random.Range(0, danger1Sections.Length);
         }
 
-        if (hitManagerScript.dangerLevel == 2)
+        if (dangerManagerScript.dangerLevel == 2)
         {
             sectionIndex = Random.Range(0, danger2Sections.Length);
         }
 
-        if (hitManagerScript.dangerLevel == 3)
+        if (dangerManagerScript.dangerLevel == 3)
         {
             sectionIndex = Random.Range(0, danger3Sections.Length);
         }
@@ -55,22 +56,22 @@ public class AddNewSection : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Trigger_NewSection"))
         {
-            if (hitManagerScript.dangerLevel == 0)
+            if (dangerManagerScript.dangerLevel == 0)
             {
                 Instantiate(danger0Sections[sectionIndex], new Vector3(0, 0, distanceBetweenSections), Quaternion.identity);
             }
 
-            if (hitManagerScript.dangerLevel == 1)
+            if (dangerManagerScript.dangerLevel == 1)
             {
                 Instantiate(danger1Sections[sectionIndex], new Vector3(0, 0, distanceBetweenSections), Quaternion.identity);
             }
 
-            if (hitManagerScript.dangerLevel == 2)
+            if (dangerManagerScript.dangerLevel == 2)
             {
                 Instantiate(danger2Sections[sectionIndex], new Vector3(0, 0, distanceBetweenSections), Quaternion.identity);
             }
 
-            if (hitManagerScript.dangerLevel == 3)
+            if (dangerManagerScript.dangerLevel == 3)
             {
                 Instantiate(danger3Sections[sectionIndex], new Vector3(0, 0, distanceBetweenSections), Quaternion.identity);
             }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.008763517, g: 0.012606244, b: 0.017012712, a: 1}
+  m_IndirectSpecularColor: {r: 0.00877482, g: 0.012587203, b: 0.017039368, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3167,7 +3167,7 @@ MonoBehaviour:
   scoreText: {fileID: 427776424}
   highScoreText: {fileID: 515167636}
   gameUI: {fileID: 1814070391}
-  hitManagerScript: {fileID: 1678711393}
+  dangerManagerScript: {fileID: 0}
   additionByDangerLevel:
   - 1
   - 2
@@ -16675,7 +16675,6 @@ MonoBehaviour:
   - {fileID: 7297564101947446539, guid: c9fe260fd52e8224ebb51437d7a66b1f, type: 3}
   - {fileID: 7297564101947446539, guid: e36bf90ca8628f243b8320ab19160e03, type: 3}
   - {fileID: 2212611849387790962, guid: 97cb704156090cd478e963b6ca900671, type: 3}
-  - {fileID: 2401736582971228233, guid: 5ed05f9725f066e489b0d7c5dc2baf6c, type: 3}
   - {fileID: 7297564101947446539, guid: 355f12a155525774993c8a3bfe78ee4c, type: 3}
   danger1Sections:
   - {fileID: 2212611849387790962, guid: 171bc94ea7e8d5e479619c3141bd3ea9, type: 3}
@@ -16723,7 +16722,7 @@ MonoBehaviour:
   - {fileID: 4480418980410954833, guid: 33b565d608af67f499b3429a7e008109, type: 3}
   - {fileID: 4480418980410954833, guid: 594cba7f9d1789a45aa5ad314846141f, type: 3}
   - {fileID: 4480418980410954833, guid: 8265899f79ab1e244a7c724c081100df, type: 3}
-  hitManagerScript: {fileID: 1678711393}
+  dangerManagerScript: {fileID: 1678711394}
 --- !u!54 &1678711391
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16765,7 +16764,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laneDistance: 3.5
   switchLaneSpeed: 6
-  hitManagerScript: {fileID: 1678711393}
   dangerManagerScript: {fileID: 1678711394}
 --- !u!114 &1678711393
 MonoBehaviour:
