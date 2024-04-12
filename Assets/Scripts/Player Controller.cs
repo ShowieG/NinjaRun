@@ -39,14 +39,16 @@ public class PlayerController : MonoBehaviour
         if (desiredLane <= -1)
         {
             targetPosition += Vector3.left * desiredLane * -1 * laneDistance;
+            SoundManager.PlaySound(SoundManager.Sound.PlayerMoveLeft);
         }
 
         else if (desiredLane >= 1)
         {
             targetPosition += Vector3.right * desiredLane * laneDistance;
+            SoundManager.PlaySound(SoundManager.Sound.PlayerMoveRight);
         }
 
-        //Move to target postion
+        //Move player to target postion
         transform.position = Vector3.Lerp(transform.position, targetPosition, switchLaneSpeed * Time.deltaTime);
     }
 

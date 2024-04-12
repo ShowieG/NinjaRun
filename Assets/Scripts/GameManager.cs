@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ResetTimeScale());
         StartCoroutine(IncreaseTimeScaleOverTime());
         playerControllerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        SoundManager.PlaySound(SoundManager.Sound.Smoke2);
     }
 
     IEnumerator IncreaseTimeScaleOverTime()
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartRunning());
     }
 
+    // Animates the start of running with player animation and road speed going up
     IEnumerator StartRunning()
     {
         yield return new WaitForSeconds(delayBeforeChange);
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Dying()
     {
+        SoundManager.PlaySound(SoundManager.Sound.Smoke2);
         particles.SetActive(true);
         characterModel.SetActive(false);
         playerControllerScript.enabled = false;
@@ -108,5 +111,10 @@ public class GameManager : MonoBehaviour
     public void QuitApplication()
     {
         Application.Quit();
+    }
+
+    public void PlayStartSound()
+    {
+        SoundManager.PlaySound(SoundManager.Sound.StartSound);
     }
 }

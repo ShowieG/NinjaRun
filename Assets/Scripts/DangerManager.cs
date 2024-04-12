@@ -103,14 +103,12 @@ public class DangerManager : MonoBehaviour
             if (enableEmission)
             {
                 material.EnableKeyword("_EMISSION");
+                yield return new WaitForSeconds(delay);
             }
             else
             {
                 material.DisableKeyword("_EMISSION");
             }
-
-            // Wait for the specified delay
-            yield return new WaitForSeconds(delay);
         }
     }
 }
