@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //This script starts and ends the game, also makes the game go faster overtime
+    //This script: starts and ends the game, makes the game go faster overtime, plays BGM in SoundManager
 
     public GameObject particles;
     public GameObject characterModel;
@@ -26,9 +26,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(ResetTimeScale());
-        StartCoroutine(IncreaseTimeScaleOverTime());
         playerControllerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        SoundManager.PlaySound(SoundManager.Sound.Smoke2);
+        SoundManager.Instance.PlaySFX("Smoke2");
     }
 
     IEnumerator IncreaseTimeScaleOverTime()
@@ -45,6 +44,8 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(StartRunning());
+        StartCoroutine(IncreaseTimeScaleOverTime());
+        SoundManager.Instance.PlayMusic("BGM1");
     }
 
     // Animates the start of running with player animation and road speed going up
@@ -96,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Dying()
     {
-        SoundManager.PlaySound(SoundManager.Sound.Smoke2);
+        SoundManager.Instance.PlaySFX("Smoke1");
         particles.SetActive(true);
         characterModel.SetActive(false);
         playerControllerScript.enabled = false;
@@ -113,8 +114,4 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void PlayStartSound()
-    {
-        SoundManager.PlaySound(SoundManager.Sound.StartSound);
-    }
 }

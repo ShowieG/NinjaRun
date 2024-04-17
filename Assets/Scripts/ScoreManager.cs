@@ -12,7 +12,6 @@ public class ScoreManager : MonoBehaviour
     public static float highScore;
 
     public GameObject gameUI;
-    //public HitManager hitManagerScript;
     public DangerManager dangerManagerScript;
     public float[] additionByDangerLevel = { 1f, 2f, 4f, 10f }; // Addition based on danger level
 

@@ -20,7 +20,7 @@ public class DangerManager : MonoBehaviour
     // Also changes house material emission
     public Material[] materials; // Array of materials whose emission you want to toggle
     public bool enableEmission = true; // Flag to enable or disable emission
-    public float delay = 0.5f; // Delay between toggling emission for each material
+    public float delay = 2f; // Delay between toggling emission for each material
 
     private void Start()
     {
@@ -99,11 +99,11 @@ public class DangerManager : MonoBehaviour
     {
         foreach (Material material in materials)
         {
+            yield return new WaitForSeconds(delay);
             // Enable or disable emission based on the flag
             if (enableEmission)
             {
                 material.EnableKeyword("_EMISSION");
-                yield return new WaitForSeconds(delay);
             }
             else
             {

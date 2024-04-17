@@ -18,6 +18,7 @@ public class SpikeTrap : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            SoundManager.Instance.PlaySFX("Spikes");
             spikesAnimator.SetBool("PlayerHit", true);
         }
     }

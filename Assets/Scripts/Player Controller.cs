@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
 
     public float laneDistance = 1; //distance between 2 lanes
     public float switchLaneSpeed = 4;
-    //public HitManager hitManagerScript;
     public DangerManager dangerManagerScript;
 
     private GameManager gameManagerScript;
@@ -26,11 +25,13 @@ public class PlayerController : MonoBehaviour
         if((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && moveLeft == true)
         {
             desiredLane--;
+            SoundManager.Instance.PlaySFX("PlayerMoveLeft");
         }
 
         if((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && moveRight == true)
         {
             desiredLane++;
+            SoundManager.Instance.PlaySFX("PlayerMoveRight");
         }
 
         //Calculate target position of desiredLane
@@ -38,14 +39,12 @@ public class PlayerController : MonoBehaviour
 
         if (desiredLane <= -1)
         {
-            targetPosition += Vector3.left * desiredLane * -1 * laneDistance;
-            SoundManager.PlaySound(SoundManager.Sound.PlayerMoveLeft);
+            targetPosition += Vector3.left * desiredLane * -1 * laneDistance;            
         }
 
         else if (desiredLane >= 1)
         {
-            targetPosition += Vector3.right * desiredLane * laneDistance;
-            SoundManager.PlaySound(SoundManager.Sound.PlayerMoveRight);
+            targetPosition += Vector3.right * desiredLane * laneDistance;     
         }
 
         //Move player to target postion
@@ -80,7 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            //hitManagerScript.IncreaseDanger();
+            SoundManager.Instance.PlaySFX("HitSound");
             dangerManagerScript.IncreaseDangerTotal();
         }
 

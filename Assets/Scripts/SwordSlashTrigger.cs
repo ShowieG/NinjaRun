@@ -9,6 +9,7 @@ public class SwordSlashTrigger : MonoBehaviour
     Animator enemyAnimator;
     public float triggerDistance = 12f;
     private GameObject player;
+    private bool sfxHasPlayed = false;
 
     private void Start()
     {
@@ -24,6 +25,12 @@ public class SwordSlashTrigger : MonoBehaviour
         if (distanceToPlayerZ < triggerDistance)
         {
             enemyAnimator.SetBool("PlayerDetected", true);
+
+            if (sfxHasPlayed == false)
+            {
+                SoundManager.Instance.PlaySFX("EnemySlash");
+                sfxHasPlayed = true;
+            }
         }
     }
 }

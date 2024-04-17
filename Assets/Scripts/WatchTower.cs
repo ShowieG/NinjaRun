@@ -20,6 +20,8 @@ public class WatchTower : MonoBehaviour
     private Vector3 lastPlayerPosition; // Last position of the player
     private Vector3 originLaser; //Where laser starts
 
+    private bool chargeSoundHasPlayed = false;
+
     void Start()
     {
         // Get the Line Renderer component attached to this GameObject
@@ -42,6 +44,12 @@ public class WatchTower : MonoBehaviour
                 // Check if the ray hit the player
                 if (hit.collider.CompareTag("Player"))
                 {
+                    if (chargeSoundHasPlayed == false)
+                    {
+                        SoundManager.Instance.PlaySFX("GunCharge");
+                        chargeSoundHasPlayed = true;
+                    }
+
                     if (elapsedTime < laserDuration)
                     {
                         //Debug.Log("Running code within Update() for " + elapsedTime + " seconds");
@@ -63,7 +71,7 @@ public class WatchTower : MonoBehaviour
 
                             StartCoroutine(ShootBullet());
                             isShooting = true;
-
+                            SoundManager.Instance.PlaySFX("GunShoot");
                             //Debug.Log("Duration reached, stopping code execution");
                         }
                     }

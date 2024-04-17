@@ -1,43 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public static class SoundManager
+public class SoundManager : MonoBehaviour
 {
-    //think i should add a sound source thats seperate to play all the bgm
-    public enum Sound
-    {
-        Crickets,
-        BGM1,
-        BGM2,
-        PlayerMoveLeft,
-        PlayerMoveRight,
-        EnemySlash,
-        GunCharge,
-        GunShoot,
-        Spikes,
-        StartSound,
-        Smoke1,
-        Smoke2,
-    }
+    public static SoundManager Instance;
+    public DangerManager dangerManagerScript;
 
-    public static void PlaySound(Sound sound)
-    {
-        GameObject soundGameObject = new GameObject("Sound");
-        AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
-        audioSource.PlayOneShot(GetAudioClip(sound));
-    }
+    public SoundLibrary[] musicSounds, sfxSounds;
+    public AudioSource musicSource, sfxSource;
 
-    private static AudioClip GetAudioClip(Sound sound)
+    private bool startSecondSong =  false;
+
+    private void Awake()
     {
-        foreach (SoundLibrary.SoundAudioClip soundAudioClip in SoundLibrary.i.soundAudioClipArray)
+        if (Instance == null)
         {
-            if(soundAudioClip.sound == sound)
+            Instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
+        /*else
+        {
+            Destroy(gameObject);
+        }*/
+    }
+
+    private void Start()
+    {
+        PlayMusic("Crickets");
+    }
+
+    // BGM1 plays via GameManager, once that is done playing it will switch to BGM2
+    private void Update()
+    {
+        if(dangerManagerScript.dangerLevel == 3)
+        {
+            if(startSecondSong == false)
             {
-                return soundAudioClip.audioClip;
+                //print("Play second music");
+                PlayMusic("BGM2");
+                startSecondSong = true;
             }
         }
-        Debug.LogError("Sound " + sound + " not found!");
-        return null;
+    }
+
+    public void PlayMusic(string name)
+    {
+        SoundLibrary s = Array.Find(musicSounds, x => x.name == name);
+
+        if(s == null)
+        {
+            Debug.Log("Sound (" + name + ") not found");
+        } else
+        {
+            musicSource.clip = s.audioClip;
+            musicSource.Play();
+        }
+    }
+
+    public void PlaySFX(string name)
+    {
+        SoundLibrary s = Array.Find(sfxSounds, x => x.name == name);
+
+        if (s == null)
+        {
+            Debug.Log("Sound (" + name + ") not found");
+        }
+        else
+        {
+            sfxSource.PlayOneShot(s.audioClip);
+        }
     }
 }
